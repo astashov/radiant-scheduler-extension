@@ -38,10 +38,11 @@ describe Page do
 
 
   it "should have <r:children> scoping" do
-    @pages[:homepage].should render(
-      '<r:children:each><r:title /> </r:children:each>'
-    ).as(
-      "All blank Unexpired Unexpired with blank start "
-    )
+    @pages[:homepage].parts = [{ :name => 'body', :content => '<r:children:each><r:title /> </r:children:each>'}]
+    @pages[:homepage].save!
+    result = @pages[:homepage].reload.render
+    result.should include('All blank')
+    result.should include('Unexpired')
+    result.should include('Unexpired with blank start')
   end
 end

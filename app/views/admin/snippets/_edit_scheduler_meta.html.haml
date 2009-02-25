@@ -1,0 +1,14 @@
+%p
+  %label{ :for => "snippet_appears_on" } Publish date
+  = text_field "snippet", "appears_on", :size => 15
+  %label{ :for => "snippet_appears_on" } Expiration date
+  = text_field "snippet", "expires_on", :size => 15
+
+
+= render :partial => 'admin/scheduler'
+- content_for :page_scripts do
+  = "Event.addBehavior({"
+  = "  '#snippet_appears_on, #snippet_expires_on': DateSelector"
+  = "});"
+- content_for :page_css do
+  = "#snippet_expires_on, #snippet_appears_on { position: relative; }"
